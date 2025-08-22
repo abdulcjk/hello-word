@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logo Generator</title>
+</head>
+<body>
+    <canvas id="logoCanvas" width="200" height="200"></canvas>
+    <br>
+    <button onclick="downloadLogo()">Download Logo</button>
+    
+    <script>
+        const canvas = document.getElementById('logoCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Create gradient
+        const gradient = ctx.createLinearGradient(0, 0, 200, 200);
+        gradient.addColorStop(0, '#2563eb');
+        gradient.addColorStop(1, '#1d4ed8');
+        
+        // Draw background circle
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(100, 100, 90, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Draw white border
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        
+        // Draw shopping cart
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        
+        // Cart body
+        ctx.fillRect(75, 85, 50, 30);
+        
+        // Cart handle
+        ctx.beginPath();
+        ctx.moveTo(70, 85);
+        ctx.lineTo(75, 85);
+        ctx.lineTo(75, 75);
+        ctx.lineTo(65, 75);
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        
+        // Cart wheels
+        ctx.beginPath();
+        ctx.arc(88, 125, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(112, 125, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // P&P text
+        ctx.fillStyle = '#2563eb';
+        ctx.font = 'bold 20px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('P&P', 100, 105);
+        
+        // Store text
+        ctx.font = 'bold 16px Arial';
+        ctx.fillText('STORE', 100, 170);
+        
+        function downloadLogo() {
+            const link = document.createElement('a');
+            link.download = 'logo.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
