@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - PnPStore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="images/logo.png" alt="PnPStore" class="logo-img">
+                    <span class="logo-text">PnPStore</span>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </nav>
+                
+                <div class="nav-actions">
+                    <div class="search-box">
+                        <input type="text" id="header-search" placeholder="Search products...">
+                        <button type="button" onclick="searchProducts()"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="auth-links">
+                        <a href="login.html" id="login-link" class="auth-link">Login</a>
+                        <a href="signup.html" id="signup-link" class="auth-link">Sign Up</a>
+                        <span id="user-welcome" class="user-welcome" style="display: none;">
+                            Welcome, <span id="username"></span>
+                            <button onclick="logout()" class="logout-btn">Logout</button>
+                        </span>
+                    </div>
+                    <a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </a>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you. Get in touch with our team.</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Visit Our Store</h3>
+                        <p>123 Commerce Street<br>Shopping District<br>New York, NY 10001</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Call Us</h3>
+                        <p>Phone: (555) 123-4567<br>Toll Free: 1-800-PNP-SHOP<br>Mon-Fri: 9AM-6PM EST</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Us</h3>
+                        <p>General: info@pnpstore.com<br>Support: support@pnpstore.com<br>Sales: sales@pnpstore.com</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Business Hours</h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday: Closed</p>
+                    </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <div class="form-card">
+                        <h2>Send us a Message</h2>
+                        <form id="contact-form" onsubmit="submitContactForm(event)">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="support">Customer Support</option>
+                                    <option value="order">Order Status</option>
+                                    <option value="return">Returns & Refunds</option>
+                                    <option value="wholesale">Wholesale Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Please provide details about your inquiry..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="newsletter" name="newsletter">
+                                    <span class="checkmark"></span>
+                                    Subscribe to our newsletter for updates and special offers
+                                </label>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>What are your shipping options?</h3>
+                        <p>We offer free standard shipping on orders over $50. Express shipping is available for $9.99.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What is your return policy?</h3>
+                        <p>We accept returns within 30 days of purchase. Items must be in original condition with tags attached.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Do you offer international shipping?</h3>
+                        <p>Currently, we only ship within the United States. International shipping coming soon!</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How can I track my order?</h3>
+                        <p>Once your order ships, you'll receive a tracking number via email to monitor your package's progress.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="PnPStore" class="footer-logo-img">
+                        <span class="footer-logo-text">PnPStore</span>
+                    </div>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Help Center</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Shipping Info</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Returns</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Track Order</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-facebook"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-twitter"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-instagram"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 PnPStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

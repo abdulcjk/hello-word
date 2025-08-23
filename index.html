@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PnPStore - Your Modern Online Shopping Destination</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="images/logo.png" alt="PnPStore" class="logo-img">
+                    <span class="logo-text">PnPStore</span>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="nav-actions">
+                    <div class="search-box">
+                        <input type="text" id="header-search" placeholder="Search products...">
+                        <button type="button" onclick="searchProducts()"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="auth-links">
+                        <a href="login.html" id="login-link" class="auth-link">Login</a>
+                        <a href="signup.html" id="signup-link" class="auth-link">Sign Up</a>
+                        <span id="user-welcome" class="user-welcome" style="display: none;">
+                            Welcome, <span id="username"></span>
+                            <button onclick="logout()" class="logout-btn">Logout</button>
+                        </span>
+                    </div>
+                    <a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </a>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Welcome to PnPStore</h1>
+                    <p class="hero-subtitle">Discover amazing products at unbeatable prices. Your one-stop shop for electronics, fashion, and home goods.</p>
+                    <a href="products.html" class="cta-button">Shop Now</a>
+                </div>
+                <div class="hero-image">
+                    <img src="images/hero-shopping.jpg" alt="Shopping Experience">
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="categories">
+            <div class="container">
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="categories-grid">
+                    <div class="category-card" onclick="filterByCategory('electronics')">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Electronics</h3>
+                        <p>Latest gadgets and tech</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('fashion')">
+                        <div class="category-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Fashion</h3>
+                        <p>Trendy clothing and accessories</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('home')">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Home & Garden</h3>
+                        <p>Everything for your home</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="products-grid" id="featured-products">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+                <div class="text-center">
+                    <a href="products.html" class="view-all-btn">View All Products</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Free Shipping</h3>
+                        <p>Free shipping on orders over $50</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <h3>Easy Returns</h3>
+                        <p>30-day return policy</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock customer service</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Secure Payment</h3>
+                        <p>Your payment information is safe</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="PnPStore" class="footer-logo-img">
+                        <span class="footer-logo-text">PnPStore</span>
+                    </div>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Help Center</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Shipping Info</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Returns</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Track Order</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-facebook"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-twitter"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-instagram"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 PnPStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

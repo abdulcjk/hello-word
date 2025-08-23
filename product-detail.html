@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Product Details - PnPStore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <img src="images/logo.png" alt="PnPStore" class="logo-img">
+                    <span class="logo-text">PnPStore</span>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </nav>
+                
+                <div class="nav-actions">
+                    <div class="search-box">
+                        <input type="text" id="header-search" placeholder="Search products...">
+                        <button type="button" onclick="searchProducts()"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="auth-links">
+                        <a href="login.html" id="login-link" class="auth-link">Login</a>
+                        <a href="signup.html" id="signup-link" class="auth-link">Sign Up</a>
+                        <span id="user-welcome" class="user-welcome" style="display: none;">
+                            Welcome, <span id="username"></span>
+                            <button onclick="logout()" class="logout-btn">Logout</button>
+                        </span>
+                    </div>
+                    <a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </a>
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="products.html">Products</a>
+                <span>/</span>
+                <span id="breadcrumb-product">Product Details</span>
+            </div>
+
+            <div class="product-detail" id="product-detail">
+                <div class="product-not-found" id="product-not-found" style="display: none;">
+                    <h2>Product Not Found</h2>
+                    <p>Sorry, the product you're looking for doesn't exist.</p>
+                    <a href="products.html" class="cta-button">Browse All Products</a>
+                </div>
+
+                <div class="product-detail-content" id="product-detail-content">
+                    <div class="product-images">
+                        <div class="main-image">
+                            <img id="main-product-image" src="" alt="Product Image">
+                        </div>
+                        <div class="image-thumbnails" id="image-thumbnails">
+                            <!-- Thumbnails will be added dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+                        <div class="product-category" id="product-category"></div>
+                        <h1 class="product-title" id="product-title"></h1>
+                        <div class="product-sku">
+                            SKU: <span id="product-sku"></span>
+                        </div>
+                        <div class="product-barcode">
+                            Barcode: <span id="product-barcode"></span>
+                        </div>
+                        
+                        <div class="product-price">
+                            <span class="price" id="product-price"></span>
+                        </div>
+
+                        <div class="product-description">
+                            <h3>Description</h3>
+                            <p id="product-description"></p>
+                        </div>
+
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <label for="quantity">Quantity:</label>
+                                <div class="quantity-controls">
+                                    <button type="button" onclick="decreaseQuantity()">-</button>
+                                    <input type="number" id="quantity" value="1" min="1" max="10">
+                                    <button type="button" onclick="increaseQuantity()">+</button>
+                                </div>
+                            </div>
+
+                            <button class="add-to-cart-btn" onclick="addToCartFromDetail()">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+
+                            <button class="wishlist-btn" onclick="showAlert('Wishlist feature coming soon!')">
+                                <i class="far fa-heart"></i>
+                                Add to Wishlist
+                            </button>
+                        </div>
+
+                        <div class="product-features">
+                            <div class="feature-item">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Free shipping on orders over $50</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-undo"></i>
+                                <span>30-day return policy</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>2-year warranty</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <section class="related-products">
+                <h2>Related Products</h2>
+                <div class="products-grid" id="related-products">
+                    <!-- Related products will be loaded dynamically -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/logo.png" alt="PnPStore" class="footer-logo-img">
+                        <span class="footer-logo-text">PnPStore</span>
+                    </div>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Help Center</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Shipping Info</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Returns</a></li>
+                        <li><a href="#" onclick="showAlert('Feature coming soon!')">Track Order</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-facebook"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-twitter"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-instagram"></i></a>
+                        <a href="#" onclick="showAlert('Feature coming soon!')"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 PnPStore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/product-detail.js"></script>
+</body>
+</html>

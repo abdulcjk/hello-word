@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - PnPStore</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Admin Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <img src="images/logo.png" alt="PnPStore" class="logo-img">
+                <span class="logo-text">PnPStore Admin</span>
+            </div>
+
+            <nav class="admin-nav">
+                <a href="#dashboard" class="admin-nav-item active" onclick="showAdminSection('dashboard')">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Dashboard
+                </a>
+                <a href="#products" class="admin-nav-item" onclick="showAdminSection('products')">
+                    <i class="fas fa-box"></i>
+                    Products
+                </a>
+                <a href="#add-product" class="admin-nav-item" onclick="showAdminSection('add-product')">
+                    <i class="fas fa-plus"></i>
+                    Add Product
+                </a>
+                <a href="#bulk-import" class="admin-nav-item" onclick="showAdminSection('bulk-import')">
+                    <i class="fas fa-upload"></i>
+                    Bulk Import
+                </a>
+                <a href="#orders" class="admin-nav-item" onclick="showAlert('Orders management coming soon!')">
+                    <i class="fas fa-shopping-cart"></i>
+                    Orders
+                </a>
+                <a href="#customers" class="admin-nav-item" onclick="showAlert('Customer management coming soon!')">
+                    <i class="fas fa-users"></i>
+                    Customers
+                </a>
+            </nav>
+
+            <div class="admin-user">
+                <div class="admin-user-info">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Admin User</span>
+                </div>
+                <button onclick="logout()" class="admin-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Admin Main Content -->
+        <main class="admin-main">
+            <div class="admin-header">
+                <h1 id="admin-page-title">Dashboard</h1>
+                <div class="admin-actions">
+                    <a href="index.html" class="view-store-btn">
+                        <i class="fas fa-store"></i>
+                        View Store
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="total-products">0</h3>
+                            <p>Total Products</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>0</h3>
+                            <p>Orders Today</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>0</h3>
+                            <p>Active Customers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>$0</h3>
+                            <p>Revenue Today</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Admin panel initialized</span>
+                            <small>Just now</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section id="products-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Manage Products</h2>
+                    <button class="btn btn-primary" onclick="showAdminSection('add-product')">
+                        <i class="fas fa-plus"></i>
+                        Add New Product
+                    </button>
+                </div>
+
+                <div class="products-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>SKU</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-products-table">
+                            <!-- Products will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Add Product Section -->
+            <section id="add-product-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Add New Product</h2>
+                </div>
+
+                <form id="add-product-form" onsubmit="addProduct(event)" class="product-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-title">Product Title *</label>
+                            <input type="text" id="product-title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-sku">SKU *</label>
+                            <input type="text" id="product-sku" name="sku" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-barcode">Barcode</label>
+                            <input type="text" id="product-barcode" name="barcode">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-category">Category *</label>
+                            <select id="product-category" name="category" required>
+                                <option value="">Select Category</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="home">Home & Garden</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-description">Description *</label>
+                        <textarea id="product-description" name="description" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-price">Price ($) *</label>
+                            <input type="number" id="product-price" name="price" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-image">Image URL *</label>
+                            <input type="url" id="product-image" name="image" required placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Add Product
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-undo"></i>
+                            Reset Form
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Bulk Import Section -->
+            <section id="bulk-import-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Bulk Import Products</h2>
+                </div>
+
+                <div class="import-options">
+                    <div class="import-card">
+                        <h3>CSV Import</h3>
+                        <p>Upload a CSV file with product data</p>
+                        <div class="file-upload">
+                            <input type="file" id="csv-file" accept=".csv" onchange="handleCSVUpload(event)">
+                            <label for="csv-file" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Choose CSV File
+                            </label>
+                        </div>
+                        <div class="csv-format">
+                            <h4>Required CSV Format:</h4>
+                            <code>title,sku,barcode,category,description,price,image</code>
+                        </div>
+                    </div>
+
+                    <div class="import-card">
+                        <h3>JSON Import</h3>
+                        <p>Upload a JSON file with product data</p>
+                        <div class="file-upload">
+                            <input type="file" id="json-file" accept=".json" onchange="handleJSONUpload(event)">
+                            <label for="json-file" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                Choose JSON File
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="import-preview" id="import-preview" style="display: none;">
+                    <h3>Import Preview</h3>
+                    <div id="preview-content"></div>
+                    <div class="import-actions">
+                        <button class="btn btn-primary" onclick="confirmImport()">
+                            <i class="fas fa-check"></i>
+                            Confirm Import
+                        </button>
+                        <button class="btn btn-secondary" onclick="cancelImport()">
+                            <i class="fas fa-times"></i>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Edit Product Modal -->
+            <div id="edit-product-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Edit Product</h2>
+                        <button class="modal-close" onclick="closeEditModal()">&times;</button>
+                    </div>
+                    <form id="edit-product-form" onsubmit="updateProduct(event)" class="product-form">
+                        <input type="hidden" id="edit-product-id" name="id">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="edit-product-title">Product Title *</label>
+                                <input type="text" id="edit-product-title" name="title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-product-sku">SKU *</label>
+                                <input type="text" id="edit-product-sku" name="sku" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="edit-product-barcode">Barcode</label>
+                                <input type="text" id="edit-product-barcode" name="barcode">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-product-category">Category *</label>
+                                <select id="edit-product-category" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="electronics">Electronics</option>
+                                    <option value="fashion">Fashion</option>
+                                    <option value="home">Home & Garden</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-product-description">Description *</label>
+                            <textarea id="edit-product-description" name="description" rows="4" required></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="edit-product-price">Price ($) *</label>
+                                <input type="number" id="edit-product-price" name="price" step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-product-image">Image URL *</label>
+                                <input type="url" id="edit-product-image" name="image" required>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Update Product
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="closeEditModal()">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
